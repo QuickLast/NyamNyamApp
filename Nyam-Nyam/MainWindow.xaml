@@ -1,0 +1,169 @@
+﻿<Window x:Class="Nyam_Nyam.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Nyam_Nyam"
+        mc:Ignorable="d"
+        Title="Recipes" Height="800" Width="1600"
+        ResizeMode="NoResize">
+    <Grid Background="#4CFDB249">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250"/>
+            <ColumnDefinition Width="1350"/>
+        </Grid.ColumnDefinitions>
+        <Border BorderBrush="Black"
+                BorderThickness="1"
+                Grid.Column="0"
+                Grid.RowSpan="5"
+                Height="784"
+                Width="250"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Background="#7FEED4FE">
+            <Grid Grid.Column="0">
+                <StackPanel Orientation="Vertical">
+                    <Image Source="/Images/logo.png"
+                           Width="100"
+                           Height="100"
+                           Margin="0 30 0 0"
+                           VerticalAlignment="Bottom"/>
+                    <TextBlock HorizontalAlignment="Center"
+                       Margin="0 10 0 0"
+                       VerticalAlignment="Top"
+                       Text="NYAM NYAM"
+                       FontSize="30"
+                       FontWeight="Black"
+                       Foreground="black"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="40 200 0 0"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left">
+                    <TextBlock  VerticalAlignment="Center"
+                                Width="170"
+                                TextAlignment="Center"
+                               HorizontalAlignment="Center"
+                                FontSize="50"
+                                FontWeight="Bold">
+                        <Hyperlink NavigateUri="DishesPage"
+                            RequestNavigate="Hyperlink_RequestNavigate" FontSize="30"
+                                   TextDecorations="">Dishes
+                        <Hyperlink.Style>
+                            <Style TargetType="{x:Type Hyperlink}">
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                <Setter Property="Foreground" Value="#51444c" />
+                                <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="#d5c847" />
+                                        <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+                                    </Trigger>
+                                </Style.Triggers>
+                               </Style>
+                        </Hyperlink.Style>
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+                
+                <StackPanel Orientation="Horizontal"
+                            Margin="40 240 0 0"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left">
+
+                    <TextBlock VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="30"
+                               Width="170"
+                                TextAlignment="Center"
+                               FontWeight="Bold">
+                    <Hyperlink NavigateUri="IngredientsPage"
+                           RequestNavigate="Hyperlink_RequestNavigate" FontSize="30"
+                                   TextDecorations="">Ingredients
+                        <Hyperlink.Style>
+                            <Style TargetType="{x:Type Hyperlink}">
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                <Setter Property="Foreground" Value="#51444c" />
+                                <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="#d5c847" />
+                                        <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+                                    </Trigger>
+                                </Style.Triggers>
+                               </Style>
+                        </Hyperlink.Style>
+                    </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal"
+                            Margin="40 280 0 0"
+                            VerticalAlignment="Top"
+                            HorizontalAlignment="Left">
+
+                    <TextBlock VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontSize="30"
+                               Width="170"
+                                TextAlignment="Center"
+                               FontWeight="Bold">
+                        <Hyperlink NavigateUri="OrdersPage"
+                            RequestNavigate="Hyperlink_RequestNavigate" FontSize="30"
+                                   TextDecorations="">Orders
+                        <Hyperlink.Style>
+                            <Style TargetType="{x:Type Hyperlink}">
+                                <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+                                <Setter Property="Foreground" Value="#51444c" />
+                                <Setter Property="TextBlock.TextDecorations" Value="{x:Null}" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Foreground" Value="#d5c847" />
+                                        <Setter Property="TextBlock.TextDecorations" Value="Underline" />
+                                    </Trigger>
+                                </Style.Triggers>
+                               </Style>
+                        </Hyperlink.Style>
+                        </Hyperlink>
+                    </TextBlock>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border BorderBrush="Black"
+                VerticalAlignment="Top"
+                BorderThickness="1"
+                Grid.RowSpan="5"
+                Grid.Column="1"
+                Height="784"
+                Width="1350"
+                HorizontalAlignment="Left">
+            <Grid Background="#fed7c1">
+                <Image Source="/Images/logo.png"
+                    Width="580"
+                    Height="580"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Margin="0 20 0 0"/>
+                <TextBlock Text="Nyam Nyam!"
+                           FontSize="100"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Bottom"
+                           Margin="0 0 0 40"/>
+                <Frame x:Name="NaFr"
+                    Grid.Column="1"
+                    Grid.RowSpan="5"
+                    NavigationUIVisibility="Hidden"/>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
