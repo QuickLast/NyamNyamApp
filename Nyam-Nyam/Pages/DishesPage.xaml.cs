@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Nyam_Nyam.DB;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Nyam_Nyam.Pages
 {
@@ -31,6 +32,7 @@ namespace Nyam_Nyam.Pages
             categories = DBConnection.nyamNyam.Category.ToList();
             dishes = DBConnection.nyamNyam.Dish.ToList();
             this.DataContext = this;
+            DishImg.Source = new BitmapImage(new Uri(@"/Images/foo.png", UriKind.Relative));
             Refresh();
         }
 
