@@ -142,8 +142,14 @@
                     <Grid Height="400"
                           Width="400"
                           Margin="6.5">
-                        <Image x:Name="DishImg" Width="400" Margin="3"
-                               Stretch="Fill"/>
+                        <Image x:Name="DishImg" 
+                               Width="400" Margin="3" 
+                               Stretch="Fill">
+                            <Image.Source>
+                                <FormatConvertedBitmap Source="{Binding Image}"
+                                                       DestinationFormat="{Binding ImageConverter}"/>
+                            </Image.Source>
+                        </Image>
                         <Rectangle Fill="Black"
                                    Opacity="0.3"
                                    VerticalAlignment="Bottom"
@@ -158,7 +164,7 @@
                                        TextWrapping="Wrap"
                                        TextAlignment="Center"
                                        FontSize="30"/>
-                            <TextBlock Text="{Binding FinalPriceInCents, StringFormat='1 portion = {0}$'}" FontSize="20"
+                            <TextBlock Text="{Binding FinalPriceInCents, StringFormat='1 portion = {0} cents'}" FontSize="20"
                                        Foreground="White"
                                        HorizontalAlignment="Center"/>
                         </StackPanel>

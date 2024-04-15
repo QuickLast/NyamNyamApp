@@ -38,15 +38,6 @@ namespace Nyam_Nyam.Pages
             IngredientsLV.ItemsSource = DBConnection.nyamNyam.Ingredient.ToList();
         }
 
-        //private void DishesLV_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (IngredientsLV.SelectedItem is Ingredient)
-        //    {
-        //        DBConnection.selectedDish = IngredientsLV.SelectedItem as Ingredient;
-        //        NavigationService.Navigate(new RecipeForSelectedDishPage(IngredientsLV.SelectedItem as Ingredient));
-        //    }
-        //}
-
         private void Hyperlink_Click(object sender, System.Windows.Navigation.RequestNavigateEventArgs e)
         {
 

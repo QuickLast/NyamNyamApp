@@ -18,13 +18,13 @@
                Style="{StaticResource Title}"
                Grid.Column="0"
                Grid.Row="0"
-               Margin="20 30 0 0"
+               Margin="10 20 0 0"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"/>
-        
+
         <StackPanel Grid.Row="0"
-                Margin="20 100 0 0"
-                Height="60"
+                Margin="600 100 0 0"
+                Height="50"
                 VerticalAlignment="Top"
                 Orientation="Horizontal"
                 Grid.ColumnSpan="2"
@@ -34,8 +34,8 @@
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"/>
             <TextBox x:Name="SearchTB"
-                Width="300"
-                Height="56"
+                Width="180"
+                Height="50"
                 HorizontalAlignment="Left"/>
         </StackPanel>
 
@@ -76,85 +76,6 @@
                 TickFrequency="10"/>
         </StackPanel>
 
-        <!--<ListView x:Name="IngredientsLV" 
-                  Margin="10"
-                  Grid.Row="1"
-                  Width="1300" 
-                  Height="500"
-                  HorizontalAlignment="Center"
-                  ItemsSource="{Binding ingredients}" 
-                  Background="Transparent" BorderThickness="0"
-                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                  ScrollViewer.CanContentScroll="False">
-            <ListView.ItemsPanel>
-            <ItemsPanelTemplate>
-                <UniformGrid Columns="2"/>
-                </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            <ListView.ItemTemplate>
-            <DataTemplate>
-                <Border BorderThickness="2" 
-                            BorderBrush="Gray" 
-                            Background="White"
-                            Margin="5" 
-                            Padding="5" 
-                            CornerRadius="0.5">
-                    <StackPanel
-                        Width="610"
-                        Height="110"                                   
-                        Cursor="Hand">
-                        <StackPanel>
-                            <TextBlock Text="{Binding Name}" 
-                                   Margin="3 5 0 0"
-                                   FontWeight="Bold"                                       
-                                   FontSize="20"
-                                   
-                                   TextWrapping="Wrap"
-                                   TextAlignment="Left"
-                                   HorizontalAlignment="Left"/>
-                            <TextBlock 
-                                  TextWrapping="Wrap"
-                                  Margin="3 5 0 0"
-                                  TextAlignment="Left"
-                                  HorizontalAlignment="Left">
-                                 <TextBlock Text="Price:"/>
-                                 <TextBlock Text="{Binding CostInCents}" />
-                                 <TextBlock Text="$"/>                                 
-                            </TextBlock>
-                            <TextBlock
-                                   Margin="3 3 0 0"                                    
-                                   TextWrapping="Wrap"
-                                   TextAlignment="Left"
-                                   HorizontalAlignment="Left">
-                                <Hyperlink Click="Hyperlink_Click">Delete</Hyperlink>
-                            </TextBlock>
-                            <TextBox
-                                PreviewTextInput="NumericOnly"
-                                x:Name="countIngredientTbx"
-                                Margin="0 -50 -220 0"
-                                Text="{Binding AvailableCount}"/>
-
-                            <TextBlock                                      
-                                  TextAlignment="Right"
-                                  HorizontalAlignment="Right">
-                                 <TextBlock 
-                                     VerticalAlignment="Center"
-                                     Margin="0 -60 48 0"
-                                     Text="{Binding Unit.Name}"/>                              
-                            </TextBlock>
-                            <Button x:Name="MinusBtn"
-                                Margin="565 -58 0 0"
-                                Click="MinusBtn_Click"/>
-                            <Button x:Name="PlusBtn"
-                                Click="PlusBtn_Click"
-                                Margin="565 -158 0 0"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-        </ListView>-->
-
         <ListView x:Name="IngredientsLV"
                   Grid.ColumnSpan="2"
                   Grid.Row="1"
@@ -162,17 +83,16 @@
                   HorizontalAlignment="Left"
                   Margin="18 10 18 10"
                   Width="1300"
-                  Height="480"
+                  Height="550"
                   d:ItemsSource="{d:SampleData ItemCount=10}"
                   ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   ScrollViewer.VerticalScrollBarVisibility="Auto"
                   ItemsSource="{Binding Ingredient}"
-                  BorderBrush="#fdb249"
                   BorderThickness="3"
                   ScrollViewer.CanContentScroll="False">
             <ListView.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#7FFED7B1"/>
+                    <GradientStop Color="Transparent"/>
                 </LinearGradientBrush>
             </ListView.Background>
             <ListView.ItemsPanel>
@@ -182,33 +102,74 @@
             </ListView.ItemsPanel>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="400"
-                          Width="500"
-                          Margin="60">
-                        <Image Source="/Images/ingredients.png" Width="400" Margin="3"
-                               Stretch="Fill"/>
+                    <Grid   
+                          Width="400"
+                          Margin="5">
                         <Rectangle Fill="Black"
                                    Opacity="0.3"
                                    VerticalAlignment="Bottom"
-                                   Height="120"/>
+                                   Height="125"/>
                         <StackPanel Orientation="Vertical"
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Bottom"
-                                        Margin="0 0 0 25">
+                                        HorizontalAlignment="Left"
+                                        VerticalAlignment="Center"
+                                        Margin="10 0 10 0">
                             <TextBlock Text="{Binding Name}"
-                                       HorizontalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   Foreground="White"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Left"
+                                   FontSize="24"
+                                       Width="220"/>
+                            <TextBlock Text="{Binding FinalPriceInCents, StringFormat='Price: {0}$'}"
+                                       FontSize="20"
+                                   Foreground="White"
+                                   HorizontalAlignment="Left"/>
+                            <TextBlock>
+                                <Hyperlink Style="{StaticResource DeleteKey}">Delete</Hyperlink>
+                            </TextBlock>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal"
+                                    HorizontalAlignment="Right"
+                                    Margin="10 0 10 0">
+                            <TextBlock Width="30"
+                                       Height="30"
+                                       FontSize="20"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
                                        Foreground="White"
-                                       TextWrapping="Wrap"
-                                       TextAlignment="Center"
-                                       FontSize="24"/>
-                            <TextBlock Text="{Binding FinalPriceInCents, StringFormat='1 portion = {0}$'}" FontSize="20"
+                                       Text="{Binding AvailableCount}"
+                                       Margin="0 0 0 3"/>
+                            <TextBlock Text="{Binding Unit.ShortName}" FontSize="20"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Right"
                                        Foreground="White"
-                                       HorizontalAlignment="Center"/>
+                                       Margin="0 0 20 5"/>
+                            <StackPanel Orientation="Vertical"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Right">
+                                <Button Margin="5"
+                                        Height="40"
+                                        Width="40"
+                                        Style="{StaticResource ListViewButton}">
+                                    <TextBlock Text="+"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Foreground="White"/>
+                                </Button>
+                                <Button Margin="5"
+                                        Height="40"
+                                        Width="40"
+                                        Style="{StaticResource ListViewButton}">
+                                    <TextBlock Text="-"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Foreground="White"/>
+                                </Button>
+                            </StackPanel>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        
         </ListView>
     </Grid>
 </Page>

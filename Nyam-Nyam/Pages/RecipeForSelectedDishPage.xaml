@@ -82,10 +82,10 @@
                     VerticalAlignment="Top"
                     Margin="10 90 0 0">
             <TextBlock Text="Servings: " VerticalAlignment="Center"/>
-            <Button x:Name="PlusBTN"
+            <Button x:Name="MinusBTN"
                     Width="35"
                     Height="30"
-                    HorizontalAlignment="Center" Click="PlusBTN_Click"
+                    HorizontalAlignment="Center" Click="MinusBTN_Click"
                     Margin="10 0 0 0">
                 <TextBlock Text="-"
                            HorizontalAlignment="Center"
@@ -101,10 +101,10 @@
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"/>
             </Border>
-            <Button x:Name="MinusBTN"
+            <Button x:Name="PlusBTN"
                     Width="35"
                     Height="30"
-                    Click="MinusBTN_Click">
+                    Click="PlusBTN_Click">
                 <TextBlock Text="+"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
@@ -155,9 +155,20 @@
                                             Width="15"
                                             Height="15"
                                             BorderThickness="1"
-                                            BorderBrush="Black"
-                                            />
-                                        <!--Background="{Binding ., Converter={StaticResource RadioButtonColor}}"-->
+                                            BorderBrush="Black">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding Color}" Value="False">
+                                                            <Setter Property="Background" Value="#fdb249"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger  Binding="{Binding Color}" Value="True">
+                                                            <Setter Property="Background" Value="#d5c847"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                        </Border>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

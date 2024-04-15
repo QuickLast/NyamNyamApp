@@ -21,7 +21,8 @@ namespace Nyam_Nyam.Pages
     /// </summary>
     public partial class RecipeForSelectedDishPage : Page
     {
-        private int count = 1;
+        private int _count = 1;
+        private double _proizved = 1;
 
         public static List<Dish> dishes { get; set; }
         public static List<Ingredient> ingredients { get; set; }
@@ -60,13 +61,13 @@ namespace Nyam_Nyam.Pages
             DishTB.Text = contextDish.Name;
             CategoryTB.Text = contextDish.Category.Name;
             DescriptionTB.Text = contextDish.Description;
-            TotalCostTB.Text = contextDish.FinalPriceInCents.ToString();
+            TotalCostTB.Text = ((double)contextDish.FinalPriceInCents/100).ToString() + " $";
 
             var time = DBConnection.nyamNyam.CookingStage.Where(x => x.DishId == contextDish.Id).Select(i => i.TimeInMinutes).ToList();
             int itogo = (int)time.Sum();
             CookingTimeTB.Text = $"{itogo} min";
 
-            ServingsTB.Text = count.ToString() + " $";
+            ServingsTB.Text = _count.ToString() + " ";
         }
 
         private void BackBTN_Click(object sender, RoutedEventArgs e)
@@ -76,23 +77,33 @@ namespace Nyam_Nyam.Pages
 
         private void MinusBTN_Click(object sender, RoutedEventArgs e)
         {
-            count++;
-            ServingsTB.Text = count.ToString();
-            TotalCostTB.Text = (contextDish.FinalPriceInCents * count).ToString() + " $";
+            if (_count > 1)
+            {
+                _count--;
+                ServingsTB.Text = _count.ToString();
+                TotalCostTB.Text = ((double)contextDish.FinalPriceInCents / 100 * _count).ToString() + " $";
+            }
+            /*_count++;
+            ServingsTB.Text = _count.ToString();
+            _proizved = 1;
+            TotalCostTB.Text = (contextDish.FinalPriceInCents * _count).ToString() + " $";*/
         }
 
         private void PlusBTN_Click(object sender, RoutedEventArgs e)
         {
-            if (count > 1)
+            /*if (_count > 1)
             {
-                count--;
-                ServingsTB.Text = count.ToString();
-                TotalCostTB.Text = (contextDish.FinalPriceInCents / count).ToString() + " $";
+                _count--;
+                ServingsTB.Text = _count.ToString();
+                TotalCostTB.Text = (contextDish.FinalPriceInCents / _count).ToString() + " $";
             }
             else
             {
-                ServingsTB.Text = count.ToString();
-            }
+                ServingsTB.Text = _count.ToString();
+            }*/
+            _count++;
+            ServingsTB.Text = _count.ToString();
+            TotalCostTB.Text = ((double)contextDish.FinalPriceInCents / 100 * _count).ToString() + " $";
         }
     }
 }
