@@ -96,18 +96,12 @@
                Margin="0 0 20 0"
                HorizontalAlignment="Left"
                VerticalAlignment="Center"/>
-            <Slider Name="RectangleHeight"
+            <Slider Name="CostSlider"
                     Width="200"
                     Orientation="Horizontal"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
-                    Value="50"
-                    Minimum="0"
-                    Maximum="200" 
-                    SmallChange="1"
-                    LargeChange="10"
-                    TickPlacement="BottomRight"
-                    TickFrequency="10"/>
+                    ValueChanged="CostSlider_ValueChanged"/>
         </StackPanel>
 
 
@@ -146,8 +140,10 @@
                                Width="400" Margin="3" 
                                Stretch="Fill">
                             <Image.Source>
-                                <FormatConvertedBitmap Source="{Binding Image}"
-                                                       DestinationFormat="{Binding ImageConverter}"/>
+                                <FormatConvertedBitmap 
+                                    Source="{Binding Image}"
+                                                       
+                                    DestinationFormat="{Binding ImageConverter}"/>
                             </Image.Source>
                         </Image>
                         <Rectangle Fill="Black"

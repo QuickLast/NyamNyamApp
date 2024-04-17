@@ -16,6 +16,7 @@ using Microsoft.Graphics.Canvas.Effects;
 using Nyam_Nyam.DB;
 using System.Windows.Controls;
 using static System.Net.Mime.MediaTypeNames;
+using System.Data.Common;
 
 namespace Nyam_Nyam.Pages
 {
@@ -33,52 +34,77 @@ namespace Nyam_Nyam.Pages
             InitializeComponent();
             categories = DBConnection.nyamNyam.Category.ToList();
             dishes = DBConnection.nyamNyam.Dish.ToList();
-            
+
             this.DataContext = this;
+
+            double max = dishes[0].FinalPriceInCents;
+            double min = dishes[0].FinalPriceInCents;
+            foreach (Dish dish in dishes)
+            {
+                if (dish.FinalPriceInCents > max)
+                {
+                    max = dish.FinalPriceInCents;
+                }
+                if (dish.FinalPriceInCents < min)
+                {
+                    min = dish.FinalPriceInCents;
+                }
+            }
+            CostSlider.Maximum = max;
+            CostSlider.Minimum = min;
+            CostSlider.Value = max;
+
             Refresh();
         }
 
         private void Refresh()
         {
             var a = CategoryCB.SelectedItem as Category;
+            var sorted = DBConnection.nyamNyam.Dish.ToList();
             if (AvailableChBx.IsChecked == false)
             {
                 if (SearchTB.Text.Length == 0 && (a == null || a.Name == "Show All"))
                 {
-                    DishesLV.ItemsSource = DBConnection.nyamNyam.Dish.ToList();
+                    sorted = sorted;
                 }
                 else if (SearchTB.Text.Length != 0 && (a == null || a.Name == "Show All"))
                 {
-                    DishesLV.ItemsSource = DBConnection.nyamNyam.Dish.Where(i => i.Name.ToLower().StartsWith(SearchTB.Text.Trim().ToLower())).ToList();
+                    sorted = sorted.Where(i => i.Name.ToLower().StartsWith(SearchTB.Text.Trim().ToLower())).ToList();
                 }
                 else if (SearchTB.Text.Length == 0 && (a != null || a.Name != "Show All"))
                 {
-                    DishesLV.ItemsSource = DBConnection.nyamNyam.Dish.Where(i => i.CategoryId == a.Id).ToList();
+                    sorted = sorted.Where(i => i.CategoryId == a.Id).ToList();
                 }
                 else if (SearchTB.Text.Length != 0 && (a != null || a.Name != "Show All"))
                 {
-                    DishesLV.ItemsSource = DBConnection.nyamNyam.Dish.Where(i => i.Name.ToLower().StartsWith(SearchTB.Text.Trim().ToLower()) && i.CategoryId == a.Id).ToList();
+                    sorted = sorted.Where(i => i.Name.ToLower().StartsWith(SearchTB.Text.Trim().ToLower()) && i.CategoryId == a.Id).ToList();
                 }
+                sorted = sorted.Where(i => i.FinalPriceInCents <= CostSlider.Value).ToList();
+
+                DishesLV.ItemsSource = sorted;
                 return;
             }
             else if (AvailableChBx.IsChecked == true)
             {
                 if (SearchTB.Text.Length == 0 && (a == null || a.Name == "Show All"))
                 {
-                    DishesLV.ItemsSource = DBConnection.nyamNyam.Dish.Where(i => i.Available == 1).ToList();
+                    sorted = sorted.Where(i => i.Available == 1).ToList();
                 }
                 else if (SearchTB.Text.Length != 0 && (a == null || a.Name == "Show All"))
                 {
-                    DishesLV.ItemsSource = DBConnection.nyamNyam.Dish.Where(i => i.Name.ToLower().StartsWith(SearchTB.Text.Trim().ToLower()) && i.Available == 1).ToList();
+                    sorted = sorted.Where(i => i.Name.ToLower().StartsWith(SearchTB.Text.Trim().ToLower()) && i.Available == 1).ToList();
                 }
                 else if (SearchTB.Text.Length == 0 && (a != null || a.Name != "Show All"))
                 {
-                    DishesLV.ItemsSource = DBConnection.nyamNyam.Dish.Where(i => i.CategoryId == a.Id && i.Available == 1).ToList();
+                    sorted = sorted.Where(i => i.CategoryId == a.Id && i.Available == 1).ToList();
                 }
                 else if (SearchTB.Text.Length != 0 && (a != null || a.Name != "Show All"))
                 {
-                    DishesLV.ItemsSource = DBConnection.nyamNyam.Dish.Where(i => i.Name.ToLower().StartsWith(SearchTB.Text.Trim().ToLower()) && i.Available == 1 && i.CategoryId == a.Id).ToList();
+                    sorted = sorted.Where(i => i.Name.ToLower().StartsWith(SearchTB.Text.Trim().ToLower()) && i.Available == 1 && i.CategoryId == a.Id).ToList();
                 };
+                sorted = sorted.Where(i => i.FinalPriceInCents <= CostSlider.Value).ToList();
+
+                DishesLV.ItemsSource = sorted;
             }
         }
 
@@ -102,6 +128,11 @@ namespace Nyam_Nyam.Pages
         }
 
         private void AvailableChBx_Checked(object sender, RoutedEventArgs e)
+        {
+            Refresh();
+        }
+
+        private void CostSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             Refresh();
         }

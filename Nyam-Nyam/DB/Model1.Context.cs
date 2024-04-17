@@ -13,10 +13,10 @@ namespace Nyam_Nyam.DB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class NyamNyam_OsipovEntities : DbContext
+    public partial class NyamNyam_OsipovEntities1 : DbContext
     {
-        public NyamNyam_OsipovEntities()
-            : base("name=NyamNyam_OsipovEntities")
+        public NyamNyam_OsipovEntities1()
+            : base("name=NyamNyam_OsipovEntities1")
         {
         }
     
